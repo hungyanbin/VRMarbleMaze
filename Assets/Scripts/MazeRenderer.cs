@@ -11,14 +11,18 @@ public class MazeRenderer : MonoBehaviour
     private Transform wallPrefab;
     void Start()
     {
-        var wall = Instantiate(wallPrefab, transform) as Transform;
-        wall.position = new Vector3(0, 0.5f, 0);
-        wall.localScale = new Vector3(length, wall.localScale.y, wall.localScale.z);
+        for(int i = 0; i<length; i++)
+        {
+            var wall = Instantiate(wallPrefab, transform) as Transform;
+            wall.position = new Vector3(i, 0.5f, 0);
+            wall.localScale = new Vector3(wall.localScale.x, wall.localScale.y, wall.localScale.z);
 
-        var topWall = Instantiate(wallPrefab, transform) as Transform;
-        topWall.position = new Vector3(0.5f, 0.5f, 0);
-        topWall.eulerAngles= new Vector3(0, 90, 0);
-        topWall.localScale = new Vector3(length, wall.localScale.y, wall.localScale.z);
+            var topWall = Instantiate(wallPrefab, transform) as Transform;
+            topWall.position = new Vector3(0.5f + i, 0.5f, 0);
+            topWall.eulerAngles = new Vector3(0, 90, 0);
+            topWall.localScale = new Vector3(wall.localScale.x, wall.localScale.y, wall.localScale.z);
+        }
+
     }
 
     // Update is called once per frame
