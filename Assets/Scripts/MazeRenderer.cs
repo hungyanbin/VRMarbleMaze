@@ -17,7 +17,8 @@ public class MazeRenderer : MonoBehaviour
     private Transform floorPrefab;
     void Start()
     {
-        Maze maze = MazeGenerator.RandomMaze(width, height);
+        //Maze maze = MazeGenerator.RandomMaze(10, 10);
+        Maze maze = MazeGenerator.StarterMaze();
         DrawMazeFloor(maze);
         DrawMaze(maze);
     }
@@ -32,7 +33,7 @@ public class MazeRenderer : MonoBehaviour
             {
                 var wallObject = Instantiate(wallPrefab, transform);
                 int wallLenght = wall.EndY - wall.StartY;
-                wallObject.position = new Vector3(wall.StartX, yOffset, (wall.StartY + wall.EndY) / 2);
+                wallObject.position = new Vector3(wall.StartX, yOffset, (wall.StartY + wall.EndY) / 2f);
                 wallObject.localScale = new Vector3(wallObject.localScale.x, wallObject.localScale.y, wallLenght);
                 MeshRenderer meshRenderer = wallObject.GetComponent<MeshRenderer>();
                 meshRenderer.material.mainTextureScale = new Vector2(wallLenght, 1);
@@ -41,7 +42,7 @@ public class MazeRenderer : MonoBehaviour
             {
                 var wallObject = Instantiate(wallPrefab, transform);
                 int wallLenght = wall.EndX - wall.StartX;
-                wallObject.position = new Vector3((wall.StartX + wall.EndX) / 2, yOffset, wall.StartY);
+                wallObject.position = new Vector3((wall.StartX + wall.EndX) / 2f, yOffset, wall.StartY);
                 wallObject.eulerAngles = new Vector3(0, 90, 0);
                 wallObject.localScale = new Vector3(wallObject.localScale.x, wallObject.localScale.y, wallLenght);
                 MeshRenderer meshRenderer = wallObject.GetComponent<MeshRenderer>();
