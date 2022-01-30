@@ -7,12 +7,14 @@ public class Maze
     private readonly List<Wall> walls;
     private readonly int width;
     private readonly int height;
+    private readonly Position startPosition;
 
-    public Maze(List<Wall> walls, int width, int height)
+    public Maze(List<Wall> walls, int width, int height, Position start)
     {
         this.walls = walls;
         this.width = width;
         this.height = height;
+        this.startPosition = start;
     }
 
     public List<Wall> GetWalls()
@@ -22,8 +24,20 @@ public class Maze
 
     public int GetWidth() { return width; }
     public int GetHeight() { return height; }
+    public Position GetStartPosition() { return startPosition; }
 }
 
+public readonly struct Position
+{
+    public Position(float x, float y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public float X { get; }
+    public float Y { get; }
+}
 public readonly struct Wall
 {
     public Wall(int startX, int startY, int endX, int endY)

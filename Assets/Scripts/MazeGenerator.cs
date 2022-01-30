@@ -17,7 +17,7 @@ public static class MazeGenerator
         {
             walls.Add(new Wall(0, j, width, j));
         }
-        return new Maze(walls, width, height);
+        return new Maze(walls, width, height, new Position(0.5f, 0.5f));
     }
 
     public static Maze StarterMaze()
@@ -96,7 +96,7 @@ public static class MazeGenerator
         walls.Add(new Wall(0, 10, 5, 10));
         walls.Add(new Wall(6, 10, 10, 10));
 
-        return new Maze(walls, 10, 10);
+        return new Maze(walls, 10, 10, new Position(0.5f, 9.5f));
     }
 
 }

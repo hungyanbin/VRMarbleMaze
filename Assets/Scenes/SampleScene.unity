@@ -164,7 +164,6 @@ GameObject:
   m_Component:
   - component: {fileID: 588296221}
   - component: {fileID: 588296220}
-  - component: {fileID: 588296222}
   m_Layer: 0
   m_Name: VR Rig
   m_TagString: Untagged
@@ -204,20 +203,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &588296222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588296219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3a93c6cd51101b4faba6840d4290409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputSource: 5
-  rotateTarget: {fileID: 1780105110}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,8 +513,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 10
   height: 10
-  wallPrefab: {fileID: 2394658885256710253, guid: 8ee6020f06224244f8c236bb7612e87b, type: 3}
-  floorPrefab: {fileID: 8573823598218025784, guid: b52c808360aafaf4f968bcbfb203899a, type: 3}
+  wallPrefab: {fileID: 2439299958293097971, guid: 8ee6020f06224244f8c236bb7612e87b, type: 3}
+  floorPrefab: {fileID: 1049447430699479972, guid: b52c808360aafaf4f968bcbfb203899a, type: 3}
+  inputSource: 5
+  marblePrefab: {fileID: 1759997014084853414, guid: 2e6f4c95ea31c284eb63793b61657415, type: 3}
 --- !u!4 &1780105112
 Transform:
   m_ObjectHideFlags: 0
@@ -556,7 +543,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
