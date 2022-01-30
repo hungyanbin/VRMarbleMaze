@@ -5,29 +5,60 @@ using UnityEngine;
 public class MazeRenderer : MonoBehaviour
 {
     [SerializeField]
-    private int length;
+    private int width;
+
+    [SerializeField]
+    private int height;
 
     [SerializeField]
     private Transform wallPrefab;
+
+    [SerializeField]
+    private Transform floorPrefab;
     void Start()
     {
-        for(int i = 0; i<length; i++)
+        Maze maze = MazeGenerator.RandomMaze(width, height);
+        DrawMazeFloor(maze);
+        DrawMaze(maze);
+    }
+
+    private void DrawMaze(Maze maze)
+    {
+        List<Wall> walls = maze.GetWalls();
+        float yOffset = 0.5f;
+        walls.ForEach(wall =>
         {
-            var wall = Instantiate(wallPrefab, transform) as Transform;
-            wall.position = new Vector3(i, 0.5f, 0);
-            wall.localScale = new Vector3(wall.localScale.x, wall.localScale.y, wall.localScale.z);
+            if (wall.IsVertical())
+            {
+                var wallObject = Instantiate(wallPrefab, transform);
+                int wallLenght = wall.EndY - wall.StartY;
+                wallObject.position = new Vector3(wall.StartX, yOffset, (wall.StartY + wall.EndY) / 2);
+                wallObject.localScale = new Vector3(wallObject.localScale.x, wallObject.localScale.y, wallLenght);
+                MeshRenderer meshRenderer = wallObject.GetComponent<MeshRenderer>();
+                meshRenderer.material.mainTextureScale = new Vector2(wallLenght, 1);
+            }
+            else if (wall.IsHorizontal())
+            {
+                var wallObject = Instantiate(wallPrefab, transform);
+                int wallLenght = wall.EndX - wall.StartX;
+                wallObject.position = new Vector3((wall.StartX + wall.EndX) / 2, yOffset, wall.StartY);
+                wallObject.eulerAngles = new Vector3(0, 90, 0);
+                wallObject.localScale = new Vector3(wallObject.localScale.x, wallObject.localScale.y, wallLenght);
+                MeshRenderer meshRenderer = wallObject.GetComponent<MeshRenderer>();
+                meshRenderer.material.mainTextureScale = new Vector2(wallLenght, 1);
+            }
+        });
+    }
 
-            var topWall = Instantiate(wallPrefab, transform) as Transform;
-            topWall.position = new Vector3(0.5f + i, 0.5f, 0);
-            topWall.eulerAngles = new Vector3(0, 90, 0);
-            topWall.localScale = new Vector3(wall.localScale.x, wall.localScale.y, wall.localScale.z);
-        }
-
+    private void DrawMazeFloor(Maze maze)
+    {
+        var floorObject = Instantiate(floorPrefab, transform);
+        floorObject.position = new Vector3(maze.GetWidth() / 2, 0, maze.GetHeight() / 2);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
